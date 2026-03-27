@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yara Naeem | High-End Makeup Artist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Playfair+Display:ital,wght@0,300..600;1,300..600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark: #000000;
+        --bg-section: #050505;
+        --bg-lighter: #0a0a0a;
+        --gold: #c5a880;
+        --gold-gradient: linear-gradient(
+          90deg,
+          transparent,
+          rgba(197, 168, 128, 0.4),
+          #c5a880,
+          rgba(197, 168, 128, 0.4),
+          transparent
+        );
+        --text-light: #f4efea;
+        --text-dim: #888888;
+        --font-primary: "Montserrat", sans-serif;
+        --font-serif: "Playfair Display", serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        font-family: var(--font-primary);
+        line-height: 1.8;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+      }
+
+      .serif-text {
+        font-family: var(--font-serif);
+      }
+
+      /* --- Reveal Animations --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      /* --- Top Bar --- */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: var(--bg-dark);
+        border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8%;
+        z-index: 1002;
+        font-size: 11px;
+        color: var(--text-light);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .top-bar-socials {
+        display: flex;
+        gap: 25px;
+      }
+      .top-bar-location {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .top-bar-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-light);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        letter-spacing: 2px;
+        font-weight: 500;
+      }
+
+      .top-bar-link svg {
+        width: 12px;
+        height: 12px;
+        fill: currentColor;
+        transition: fill 0.3s ease;
+      }
+
+      .top-bar-link:hover {
+        color: var(--gold);
+      }
+
+      /* --- STACKED Main Navigation --- */
+      header {
+        position: fixed;
+        top: 10px;
+        width: 100%;
+        height: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+        padding-bottom: 10px;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.4);
+        transition: background 0.4s ease, border-bottom 0.4s ease,
+          height 0.4s ease;
+        border-bottom: 1px solid transparent;
+      }
+
+      header.scrolled {
+        background: var(--bg-dark);
+        border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+      }
+
+      .brand-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+        z-index: 1001;
+      }
+
+      .brand-logo img {
+        width: 240px;
+        height: auto;
+        display: block;
+        transition: width 0.4s ease;
+      }
+
+      /* --- THE GOLD DIVIDER --- */
+      .nav-divider {
+        width: 100%;
+        max-width: 350px;
+        height: 1px;
+        background: var(--gold-gradient);
+        margin-bottom: 25px;
+      }
+
+      .nav-links-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      /* --- Premium Hover Links --- */
+      .nav-link {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 5px 0;
+        display: inline-block;
+      }
+
+      .nav-link:hover {
+        color: var(--gold);
+        letter-spacing: 4.5px;
+        transform: translateY(-2px);
+      }
+
+      .btn-luxury {
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        background: transparent;
+        padding: 10px 28px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.5s ease;
+        font-family: var(--font-primary);
+        display: inline-block;
+      }
+
+      .btn-luxury:hover {
+        background: var(--gold);
+        color: var(--bg-dark);
+      }
+
+      /* --- Mobile Hamburger Button --- */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .menu-toggle span {
+        width: 30px;
+        height: 1px;
+        background-color: var(--gold);
+        transition: all 0.3s ease;
+      }
+
+      /* Hamburger to X Animation */
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        height: 100vh;
+        margin-top: 0;
+        padding-top: 180px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+        overflow: hidden;
+      }
+
+      .hero-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+      }
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center 20%;
+        opacity: 0;
+        animation: fadeLoop 44s infinite;
+      }
+
+      .hero-slide:nth-child(1) {
+        background-image: url("images-brides/16.3.JPG");
+        animation-delay: 0s;
+      }
+      .hero-slide:nth-child(2) {
+        background-image: url("images-brides/4.3.JPG");
+        animation-delay: 4s;
+      }
+      .hero-slide:nth-child(3) {
+        background-image: url("images-brides/17.JPG");
+        animation-delay: 8s;
+      }
+      .hero-slide:nth-child(4) {
+        background-image: url("images-brides/18.JPG");
+        animation-delay: 12s;
+      }
+      .hero-slide:nth-child(5) {
+        background-image: url("images-brides/4.JPG");
+        animation-delay: 16s;
+      }
+      .hero-slide:nth-child(6) {
+        background-image: url("images-brides/16.2.JPG");
+        animation-delay: 20s;
+      }
+      .hero-slide:nth-child(7) {
+        background-image: url("images-brides/19.JPG");
+        animation-delay: 24s;
+      }
+      .hero-slide:nth-child(8) {
+        background-image: url("images-brides/16.1.JPG");
+        animation-delay: 28s;
+      }
+      .hero-slide:nth-child(9) {
+        background-image: url("images-brides/4.1.JPG");
+        animation-delay: 32s;
+      }
+      .hero-slide:nth-child(10) {
+        background-image: url("images-brides/17.1.JPG");
+        animation-delay: 36s;
+      }
+      .hero-slide:nth-child(11) {
+        background-image: url("images-brides/4.4.JPG");
+        animation-delay: 40s;
+      }
+
+      @keyframes fadeLoop {
+        0% {
+          opacity: 0;
+          transform: scale(1);
+        }
+        2% {
+          opacity: 1;
+        }
+        9% {
+          opacity: 1;
+        }
+        12% {
+          opacity: 0;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: -1;
+      }
+
+      .hero-content {
+        margin-top: 60px;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 2s ease forwards;
+      }
+
+      .hero-title-main {
+        font-size: 6rem;
+        color: var(--text-light);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 200;
+        line-height: 1;
+        margin-bottom: 20px;
+        margin-right: -0.25em;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+        color: var(--gold);
+        letter-spacing: 8px;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        margin-right: -8px;
+      }
+
+      .hero .btn-luxury {
+        padding: 16px 45px;
+        font-size: 13px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Social Proof Banner --- */
+      .social-proof {
+        background: var(--bg-lighter);
+        padding: 40px 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+      }
+      .proof-text {
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+      .proof-text span {
+        color: var(--gold);
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        font-style: italic;
+      }
+
+      /* --- Who is Yara Section --- */
+      .about-artist {
+        padding: 150px 10%;
+        background-color: var(--bg-section);
+        text-align: center;
+        border-bottom: 1px solid rgba(197, 168, 128, 0.05);
+      }
+      .about-svg-container {
+        margin: 0 auto 30px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 120px;
+      }
+      .yn-monogram-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .yn-text {
+        font-family: var(--font-serif);
+        font-size: 110px;
+        font-weight: 300;
+        fill: transparent;
+        stroke: var(--gold);
+        stroke-width: 1.5px;
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        transition: stroke-dashoffset 3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          fill 1.5s ease-in-out 1.5s;
+      }
+      .about-artist.active .yn-text {
+        stroke-dashoffset: 0;
+        fill: var(--gold);
+      }
+      .about-title-small {
+        font-size: 0.9rem;
+        color: var(--gold);
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+      .about-title-main {
+        font-size: 3.5rem;
+        font-weight: 200;
+        color: var(--text-light);
+        margin-bottom: 30px;
+      }
+      .about-desc {
+        color: var(--text-dim);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 2;
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+      }
+
+      /* --- The Experience Journey --- */
+      .experience {
+        padding: 150px 8%;
+        background: var(--bg-section);
+      }
+      .exp-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+      }
+      .exp-left {
+        width: 40%;
+        position: sticky;
+        top: 300px;
+      }
+      .exp-left h2 {
+        font-size: 4rem;
+        color: var(--text-light);
+        font-weight: 200;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .exp-left p {
+        font-family: var(--font-serif);
+        color: var(--gold);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .exp-right {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      .exp-item {
+        position: relative;
+        padding-left: 60px;
+        border-left: 1px solid rgba(197, 168, 128, 0.2);
+        transition: border-color 0.5s ease;
+      }
+      .exp-item:hover {
+        border-left: 1px solid var(--gold);
+      }
+      .step-number {
+        position: absolute;
+        left: -45px;
+        top: -15px;
+        font-family: var(--font-serif);
+        font-size: 6rem;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(197, 168, 128, 0.4);
+        line-height: 1;
+        transition: all 0.5s ease;
+        z-index: 0;
+      }
+      .exp-item:hover .step-number {
+        -webkit-text-stroke: 1.5px var(--gold);
+        transform: scale(1.05) translateX(-5px);
+      }
+      .step-title {
+        font-size: 1.8rem;
+        color: var(--text-light);
+        font-weight: 300;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+      }
+      .step-text {
+        color: var(--text-dim);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* --- Masterpiece Accordion --- */
+      .collections {
+        padding: 150px 5%;
+        background: var(--bg-dark);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+      .section-header h2 {
+        font-size: 3.5rem;
+        color: var(--text-light);
+        font-weight: 200;
+        letter-spacing: 2px;
+      }
+      .section-header p {
+        font-family: var(--font-serif);
+        color: var(--gold);
+        font-size: 1rem;
+        letter-spacing: 6px;
+        margin-top: 15px;
+        text-transform: uppercase;
+      }
+
+      .masterpiece-accordion {
+        display: flex;
+        width: 100%;
+        height: 75vh;
+        gap: 10px;
+      }
+      .accordion-panel {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background: var(--bg-section);
+      }
+      .accordion-panel:hover {
+        flex: 5;
+      }
+      .accordion-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease, filter 0.7s ease;
+        filter: grayscale(40%) brightness(0.6);
+      }
+      .accordion-panel:hover img {
+        filter: grayscale(0%) brightness(1);
+        transform: scale(1.05);
+      }
+
+      .accordion-vertical-title {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-90deg);
+        transform-origin: bottom center;
+        color: var(--text-light);
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        white-space: nowrap;
+        letter-spacing: 2px;
+        transition: opacity 0.3s ease;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .accordion-panel:hover .accordion-vertical-title {
+        opacity: 0;
+      }
+
+      .accordion-content {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease 0.2s;
+        pointer-events: none;
+      }
+      .accordion-panel:hover .accordion-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .accordion-content h3 {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--text-light);
+        margin-bottom: 5px;
+        white-space: nowrap;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      }
+      .accordion-content p {
+        font-size: 0.8rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      }
+
+      /* --- Hair Transformations Section --- */
+      .hair-transformations {
+        padding: 150px 8%;
+        background: var(--bg-section);
+      }
+      .hair-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+      .transform-card {
+        position: relative;
+        aspect-ratio: 4/5;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid rgba(197, 168, 128, 0.1);
+      }
+      .img-before,
+      .img-after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.8s ease;
+      }
+      .img-after {
+        opacity: 0;
+      }
+      .transform-card:hover .img-before {
+        opacity: 0;
+      }
+      .transform-card:hover .img-after {
+        opacity: 1;
+      }
+      .transform-label {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        border: 1px solid var(--gold);
+        padding: 8px 20px;
+        color: var(--gold);
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        z-index: 10;
+        transition: all 0.4s ease;
+        pointer-events: none;
+      }
+      .transform-card .transform-label::after {
+        content: "Hover for After";
+      }
+      .transform-card:hover .transform-label {
+        background: var(--gold);
+        color: var(--bg-dark);
+      }
+      .transform-card:hover .transform-label::after {
+        content: "The Result";
+      }
+
+      /* --- The Philosophy --- */
+      .philosophy {
+        padding: 150px 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 120px;
+        background-color: var(--bg-dark);
+      }
+      .phil-content {
+        flex: 1;
+      }
+      .phil-subtitle {
+        color: var(--gold);
+        font-size: 0.85rem;
+        letter-spacing: 4px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+      }
+      .phil-title {
+        font-size: 3.5rem;
+        font-weight: 200;
+        margin-bottom: 40px;
+        color: var(--text-light);
+        line-height: 1.3;
+      }
+      .phil-text {
+        color: var(--text-dim);
+        font-size: 1rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+        max-width: 90%;
+      }
+      .phil-visual {
+        flex: 1;
+        position: relative;
+      }
+      .phil-img {
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+        filter: grayscale(20%) contrast(1.1);
+      }
+
+      /* ==================================================
+         NEW FULL RESPONSIVE LUXURY FOOTER
+         ================================================== */
+      .footer-main {
+        background-color: var(--bg-dark);
+        border-top: 1px solid rgba(197, 168, 128, 0.15);
+        padding: 100px 8% 40px 8%;
+      }
+
+      .footer-top {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .footer-top h2 {
+        font-size: 3.5rem;
+        font-weight: 200;
+        color: var(--text-light);
+        margin-bottom: 20px;
+      }
+
+      .footer-top p {
+        color: var(--text-dim);
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 60px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-col h4 {
+        color: var(--gold);
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
+        margin-bottom: 15px;
+      }
+
+      .footer-col ul a,
+      .footer-col p {
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-col ul a:hover {
+        color: var(--gold);
+      }
+
+      .footer-logo {
+        width: 140px;
+        margin-bottom: 20px;
+        opacity: 0.8;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        color: var(--text-dim);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      /* ==================================================
+         MOBILE RESPONSIVE FIXES
+         ================================================== */
+      @media (max-width: 900px) {
+        /* Utility to hide text in top bar, keeping only icons */
+        .hide-mobile {
+          display: none !important;
+        }
+
+        .top-bar {
+          padding: 0 5%;
+        }
+
+        /* Mobile Header / Hamburger */
+        header {
+          height: 100px;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 10px 5% 0 5%;
+        }
+
+        .brand-logo {
+          margin-bottom: 0;
+        }
+        .brand-logo img {
+          width: 140px;
+        }
+        .nav-divider {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: flex;
+        } /* Show Hamburger */
+
+        /* Mobile Navigation Full Screen Overlay */
+        .nav-links-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.98);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.4s ease;
+        }
+
+        .nav-links-container.open {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .nav-link {
+          font-size: 18px;
+          letter-spacing: 4px;
+        }
+
+        /* Hero Section Adjustments */
+        .hero {
+          padding-top: 100px;
+        }
+        .hero-title-main {
+          font-size: 3.5rem;
+          letter-spacing: 0.15em;
+        }
+        .hero-subtitle {
+          font-size: 0.8rem;
+          letter-spacing: 4px;
+        }
+
+        /* General Section Adjustments */
+        section,
+        .footer-main {
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+        .section-header h2 {
+          font-size: 2.5rem;
+        }
+
+        /* Experience Section Mobile */
+        .exp-container {
+          flex-direction: column;
+          gap: 40px;
+        }
+        .exp-left {
+          width: 100%;
+          position: relative;
+          top: 0;
+        }
+        .exp-left h2 {
+          font-size: 3rem;
+        }
+        .exp-right {
+          width: 100%;
+          padding-top: 20px;
+          gap: 80px;
+        }
+        .step-number {
+          font-size: 4rem;
+          left: -20px;
+          opacity: 0.2;
+        }
+        .exp-item {
+          padding-left: 30px;
+          border-left: 1px solid var(--gold);
+        } /* Keeps line visible always on mobile */
+
+        /* Masterpiece Accordion -> Stacks automatically for touch screens */
+        .masterpiece-accordion {
+          flex-direction: column;
+          height: auto;
+          gap: 20px;
+        }
+        .accordion-panel {
+          height: 350px;
+          flex: none !important; /* Disables flex-grow hover effect for mobile */
+        }
+        .accordion-panel img {
+          filter: grayscale(0%) brightness(0.85);
+        }
+        .accordion-vertical-title {
+          display: none;
+        }
+        .accordion-content {
+          opacity: 1;
+          transform: translateY(0);
+          left: 20px;
+          bottom: 20px;
+        }
+        .accordion-content h3 {
+          font-size: 1.8rem;
+        }
+
+        /* Hair Section Mobile */
+        .hair-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Philosophy Mobile */
+        .philosophy {
+          flex-direction: column;
+          gap: 50px;
+          text-align: center;
+        }
+        .phil-img {
+          height: 400px;
+        }
+
+        /* Footer Mobile */
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+        .footer-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-top h2 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-socials">
+        <a
+          href="https://www.instagram.com/yaranaeemmakeup"
+          target="_blank"
+          class="top-bar-link"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+            />
+          </svg>
+          <span class="hide-mobile">INSTAGRAM</span>
+        </a>
+        <a
+          href="https://www.facebook.com/share/1XrVY52x2X/"
+          target="_blank"
+          class="top-bar-link"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+            />
+          </svg>
+          <span class="hide-mobile">FACEBOOK</span>
+        </a>
+      </div>
+
+      <div class="top-bar-location">
+        <a
+          href="https://maps.google.com/?q=Mansoura+Dakahlia+Egypt"
+          target="_blank"
+          class="top-bar-link"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"
+            />
+          </svg>
+          <span class="hide-mobile">MANSOURA, DAKAHLIA</span>
+        </a>
+
+        <a
+          href="index-ar.html"
+          class="top-bar-link"
+          style="color: var(--gold); font-weight: 600"
+        >
+          <span style="font-size: 14px; margin-right: 4px">🇪🇬</span> AR
+        </a>
+      </div>
+    </div>
+
+    <header id="navbar">
+      <div class="brand-logo">
+        <img src="images-logo/Untitled.png" alt="Yara Naeem" />
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="menu-toggle" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links-container" id="nav-links">
+        <a href="#collections" class="nav-link">Makeup</a>
+        <a href="#hair" class="nav-link">Hair</a>
+        <a href="#philosophy" class="nav-link">Philosophy</a>
+        <a href="#apply" class="btn-luxury">Book Your Look</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-slider">
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title-main serif-text">Yara Naeem</h1>
+        <div class="hero-subtitle">High-End Makeup Artist</div>
+        <a href="#apply" class="btn-luxury">Book Your Look</a>
+      </div>
+    </section>
+
+    <div class="social-proof reveal">
+      <p class="proof-text">
+        Join over <span>80,000</span> women who trust Yara's signature touch
+      </p>
+    </div>
+
+    <section class="about-artist reveal" id="about">
+      <div class="about-svg-container">
+        <svg
+          class="yn-monogram-svg"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <text
+            x="50%"
+            y="55%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            class="yn-text"
+          >
+            YN
+          </text>
+        </svg>
+      </div>
+
+      <div class="about-text-container reveal delay-1">
+        <h2 class="about-title-small">Meet The Artist</h2>
+        <h3 class="about-title-main serif-text">Who is Yara Naeem?</h3>
+        <p class="about-desc">
+          Yara Naeem is not just a makeup artist; she is a visual artist who
+          creates timeless beauty. With years of experience in the world of
+          high-end cosmetics, she has secured an exceptional position as one of
+          the most prominent names in bridal and evening glamour.
+        </p>
+        <p class="about-desc">
+          Her philosophy relies on highlighting the inner light of every woman,
+          blending global techniques with the finest products to create looks
+          that breathe elegance and luxury. Yara believes that every face is a
+          unique canvas waiting for the royal touch to shine on her big day.
+        </p>
+      </div>
+    </section>
+
+    <section class="collections" id="collections">
+      <div class="section-header reveal">
+        <h2 class="serif-text">The Masterpieces</h2>
+        <p>Bridal & Evening Glamour</p>
+      </div>
+
+      <div class="masterpiece-accordion reveal delay-1">
+        <div class="accordion-panel">
+          <img src="images-brides/16.JPG" alt="Royal Bridal" />
+          <div class="accordion-vertical-title">ROYAL BRIDAL</div>
+          <div class="accordion-content">
+            <h3>Royal Bridal</h3>
+            <p>The Signature Look</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/4.JPG" alt="Katb Ktab" />
+          <div class="accordion-vertical-title">KATB KTAB</div>
+          <div class="accordion-content">
+            <h3>Katb Ktab</h3>
+            <p>Soft & Elegant</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/12.JPG" alt="Evening Glam" />
+          <div class="accordion-vertical-title">EVENING GLAM</div>
+          <div class="accordion-content">
+            <h3>Evening Glam</h3>
+            <p>Striking Beauty</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/17.JPG" alt="Editorial" />
+          <div class="accordion-vertical-title">EDITORIAL</div>
+          <div class="accordion-content">
+            <h3>Editorial</h3>
+            <p>Artistic Vision</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/14.JPG" alt="Modest Elegance" />
+          <div class="accordion-vertical-title">MODEST ELEGANCE</div>
+          <div class="accordion-content">
+            <h3>Modest Elegance</h3>
+            <p>Flawless Finish</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/8.JPG" alt="The Glow" />
+          <div class="accordion-vertical-title">THE GLOW</div>
+          <div class="accordion-content">
+            <h3>The Glow</h3>
+            <p>Timeless Radiance</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hair-transformations" id="hair">
+      <div class="section-header reveal">
+        <h2 class="serif-text">Hair Artistry</h2>
+        <p>Before & After Transformations</p>
+      </div>
+
+      <div class="hair-grid">
+        <div class="transform-card reveal">
+          <img src="images-hair/4.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/4.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
+
+        <div class="transform-card reveal delay-1">
+          <img src="images-hair/7.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/7.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
+
+        <div class="transform-card reveal delay-2">
+          <img src="images-hair/3.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/3.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+      <div class="phil-content reveal">
+        <div class="phil-subtitle">The Signature</div>
+        <h2 class="phil-title serif-text">
+          Beauty is not a step,<br />it's an identity.
+        </h2>
+        <p class="phil-text">
+          At Yara Naeem Studio, we don't change your features; we celebrate
+          them. We use the latest global techniques mixed with a precise
+          artistic vision to create a look that highlights your inner glow.
+        </p>
+        <p class="phil-text">
+          We want you to look in the mirror and feel absolute confidence... an
+          unforgettable confidence, and a breathtaking look worthy of your
+          exceptional day.
+        </p>
+      </div>
+      <div class="phil-visual reveal delay-1">
+        <img
+          src="images-brides/15.JPG"
+          alt="Yara Naeem Philosophy"
+          class="phil-img"
+        />
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="exp-container reveal">
+        <div class="exp-left">
+          <h2 class="serif-text">The Royal<br />Journey</h2>
+          <p>The Bespoke Experience</p>
+        </div>
+
+        <div class="exp-right">
+          <div class="exp-item">
+            <div class="step-number">01</div>
+            <h3 class="step-title">The Vision & Analysis</h3>
+            <p class="step-text">
+              A deep dive into your bridal aesthetic, dress details, and facial
+              architecture. We analyze your skin type to build a customized
+              pre-wedding skincare regimen, ensuring the perfect canvas long
+              before the big day arrives.
+            </p>
+          </div>
+
+          <div class="exp-item">
+            <div class="step-number">02</div>
+            <h3 class="step-title">The Masterclass Trial</h3>
+            <p class="step-text">
+              An exclusive in-studio preview where your look comes to life. We
+              test elite, high-performance products for seamless longevity,
+              photograph the look under various lighting, and meticulously
+              refine every detail until it matches your exact vision.
+            </p>
+          </div>
+
+          <div class="exp-item">
+            <div class="step-number">03</div>
+            <h3 class="step-title">The Wedding Day Execution</h3>
+            <p class="step-text">
+              On-location luxury service beginning with a soothing lymphatic
+              facial prep. We execute a flawless, tear-proof makeup application,
+              complete with a signature body glow, perfect veil placement, and a
+              curated touch-up kit to keep you radiant all night.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="apply" class="footer-main">
+      <div class="footer-top reveal">
+        <h2 class="serif-text">Secure Your Date</h2>
+        <p>
+          We accept a limited number of bookings to ensure a complete, bespoke
+          artistic experience worthy of you. Contact us now to design your
+          exclusive look.
+        </p>
+        <a
+          href="https://www.instagram.com/yaranaeemmakeup"
+          target="_blank"
+          class="btn-luxury"
+          >Contact via Instagram</a
+        >
+      </div>
+
+      <div class="footer-grid reveal delay-1">
+        <div class="footer-col">
+          <img
+            src="images-logo/Untitled.png"
+            alt="Yara Naeem"
+            class="footer-logo"
+          />
+          <p>High-End Makeup Artistry<br />Mansoura, Egypt.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#collections">The Masterpieces</a></li>
+            <li><a href="#hair">Hair Artistry</a></li>
+            <li><a href="#philosophy">Our Philosophy</a></li>
+            <li><a href="#experience">The Royal Journey</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li>
+              <a
+                href="https://www.instagram.com/yaranaeemmakeup"
+                target="_blank"
+                >Instagram</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/share/1XrVY52x2X/"
+                target="_blank"
+                >Facebook</a
+              >
+            </li>
+            <li><a href="index-ar.html">عربي (Arabic)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Yara Naeem. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        /* --- Mobile Navigation Logic --- */
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const navLinksContainer = document.getElementById("nav-links");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        mobileMenuBtn.addEventListener("click", function () {
+          this.classList.toggle("active");
+          navLinksContainer.classList.toggle("open");
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenuBtn.classList.remove("active");
+            navLinksContainer.classList.remove("open");
+          });
+        });
+
+        /* --- Scroll / Sticky Header Logic --- */
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 40) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        /* --- Intersection Observer (Reveal on Scroll) --- */
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.15,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              if (entry.target.classList.contains("about-artist")) {
+                entry.target.classList.add("active");
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        const reveals = document.querySelectorAll(".reveal");
+        reveals.forEach((reveal) => {
+          observer.observe(reveal);
+        });
+      });
+    </script>
+  </body>
+</html>

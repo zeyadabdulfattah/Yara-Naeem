@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>يارا نعيم - خبيرة تجميل | Yara Naeem Makeup Artist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,300..600;1,300..600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark: #000000;
+        --bg-section: #050505;
+        --bg-lighter: #0a0a0a;
+        --gold: #c5a880;
+        --text-light: #f4efea; /* Bright White/Ivory */
+        --text-dim: #888888;
+        --font-ar: "Cairo", sans-serif;
+        --font-en: "Playfair Display", serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        font-family: var(--font-ar);
+        line-height: 1.8;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-dark);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+      }
+
+      .en-text {
+        font-family: var(--font-en);
+      }
+
+      /* --- Reveal Animations --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .delay-1 {
+        transition-delay: 0.2s;
+      }
+      .delay-2 {
+        transition-delay: 0.4s;
+      }
+
+      /* --- Top Bar (Restored Dark Theme with Bright White Icons/Text) --- */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background-color: var(--bg-dark); /* Restored Dark Background */
+        border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8%;
+        z-index: 1002;
+        font-size: 11px;
+        color: var(--text-light); /* Bright White */
+        letter-spacing: 1px;
+      }
+
+      .top-bar-socials {
+        display: flex;
+        gap: 25px;
+      }
+
+      .top-bar-location {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .top-bar-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-light); /* Bright White */
+        text-decoration: none;
+        transition: color 0.3s ease;
+        letter-spacing: 2px;
+        font-weight: 500;
+      }
+
+      .top-bar-link svg {
+        width: 12px;
+        height: 12px;
+        fill: currentColor;
+        transition: fill 0.3s ease;
+      }
+
+      .top-bar-link:hover {
+        color: var(--gold);
+      }
+
+      /* --- Main Navigation --- */
+      header {
+        position: fixed;
+        top: 50px;
+        width: 100%;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8%;
+        z-index: 1000;
+        background: var(--bg-dark);
+        transition: all 0.4s ease;
+        border-bottom: 1px solid transparent;
+      }
+
+      header.scrolled {
+        top: 50px;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+      }
+
+      .nav-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-side.right {
+        justify-content: flex-start;
+        gap: 40px;
+      }
+      .nav-side.left {
+        justify-content: flex-end;
+        gap: 40px;
+      }
+
+      /* Floating Absolute Logo */
+      .brand-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .brand-logo img {
+        width: 180px;
+        height: auto;
+        opacity: 1;
+        transition: opacity 0.8s ease, transform 0.6s ease;
+      }
+
+      header.scrolled .brand-logo img {
+        opacity: 0.95;
+        transform: scale(1);
+      }
+
+      /* Upgraded Luxury Nav Links */
+      .nav-link {
+        color: var(--text-light);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        padding: 5px 0;
+        display: inline-block;
+      }
+
+      /* The Gold Glowing Dot Hover Effect */
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold);
+        transform: translateX(-50%) scale(0);
+        transition: transform 0.4s ease;
+        box-shadow: 0 0 10px var(--gold);
+      }
+
+      .nav-link:hover {
+        color: var(--gold);
+        transform: translateY(-3px);
+      }
+
+      .nav-link:hover::before {
+        transform: translateX(-50%) scale(1);
+      }
+
+      /* The Global Luxury Button */
+      .btn-luxury {
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        background: transparent;
+        padding: 16px 45px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.5s ease;
+        font-family: var(--font-ar);
+      }
+
+      .btn-luxury:hover {
+        background: var(--gold);
+        color: var(--bg-dark);
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        height: calc(100vh - 200px);
+        margin-top: 200px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 5%;
+        overflow: hidden;
+      }
+
+      .hero-slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+      }
+
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center 20%;
+        opacity: 0;
+        animation: fadeLoop 44s infinite;
+      }
+
+      /* 11 Images */
+      .hero-slide:nth-child(1) {
+        background-image: url("images-brides/16.3.JPG");
+        animation-delay: 0s;
+      }
+      .hero-slide:nth-child(2) {
+        background-image: url("images-brides/4.3.JPG");
+        animation-delay: 4s;
+      }
+      .hero-slide:nth-child(3) {
+        background-image: url("images-brides/17.JPG");
+        animation-delay: 8s;
+      }
+      .hero-slide:nth-child(4) {
+        background-image: url("images-brides/18.JPG");
+        animation-delay: 12s;
+      }
+      .hero-slide:nth-child(5) {
+        background-image: url("images-brides/4.JPG");
+        animation-delay: 16s;
+      }
+      .hero-slide:nth-child(6) {
+        background-image: url("images-brides/16.2.JPG");
+        animation-delay: 20s;
+      }
+      .hero-slide:nth-child(7) {
+        background-image: url("images-brides/19.JPG");
+        animation-delay: 24s;
+      }
+      .hero-slide:nth-child(8) {
+        background-image: url("images-brides/16.1.JPG");
+        animation-delay: 28s;
+      }
+      .hero-slide:nth-child(9) {
+        background-image: url("images-brides/4.1.JPG");
+        animation-delay: 32s;
+      }
+      .hero-slide:nth-child(10) {
+        background-image: url("images-brides/17.1.JPG");
+        animation-delay: 36s;
+      }
+      .hero-slide:nth-child(11) {
+        background-image: url("images-brides/4.4.JPG");
+        animation-delay: 40s;
+      }
+
+      @keyframes fadeLoop {
+        0% {
+          opacity: 0;
+          transform: scale(1);
+        }
+        2% {
+          opacity: 1;
+        }
+        9% {
+          opacity: 1;
+        }
+        12% {
+          opacity: 0;
+          transform: scale(1.05);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: -1;
+      }
+
+      .hero-content {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 2s ease forwards;
+      }
+
+      .hero-title-en {
+        font-size: 5.5rem;
+        color: var(--text-light);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 200;
+        line-height: 1;
+        margin-bottom: 20px;
+        margin-right: -0.25em;
+      }
+
+      .hero-title-ar {
+        font-size: 1.6rem;
+        color: var(--gold);
+        letter-spacing: 18px;
+        font-weight: 200;
+        margin-bottom: 50px;
+        margin-right: -18px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Social Proof Banner --- */
+      .social-proof {
+        background: var(--bg-lighter);
+        padding: 40px 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+      }
+
+      .proof-text {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+
+      .proof-text span {
+        color: var(--gold);
+        font-family: var(--font-en);
+        font-size: 1.1rem;
+        font-style: italic;
+      }
+
+      /* --- Who is Yara Section (Elegant YN Monogram Reveal) --- */
+      .about-artist {
+        padding: 150px 10%;
+        background-color: var(--bg-section);
+        text-align: center;
+        border-bottom: 1px solid rgba(197, 168, 128, 0.05);
+      }
+
+      .about-svg-container {
+        margin: 0 auto 30px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 120px;
+      }
+
+      .yn-monogram-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      /* The Text Drawing Animation */
+      .yn-text {
+        font-family: var(--font-en);
+        font-size: 110px;
+        font-weight: 300;
+        fill: transparent;
+        stroke: var(--gold);
+        stroke-width: 1.5px;
+
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+
+        transition: stroke-dashoffset 3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          fill 1.5s ease-in-out 1.5s;
+      }
+
+      .about-artist.active .yn-text {
+        stroke-dashoffset: 0;
+        fill: var(--gold);
+      }
+
+      .about-title-en {
+        font-size: 1.2rem;
+        color: var(--gold);
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+      }
+
+      .about-title-ar {
+        font-size: 3rem;
+        font-weight: 200;
+        color: var(--text-light);
+        margin-bottom: 30px;
+      }
+
+      .about-desc {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 2;
+        max-width: 800px;
+        margin: 0 auto 20px auto;
+      }
+
+      /* --- The Philosophy --- */
+      .philosophy {
+        padding: 150px 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 120px;
+        background-color: var(--bg-dark);
+      }
+
+      .phil-content {
+        flex: 1;
+      }
+
+      .phil-subtitle {
+        color: var(--gold);
+        font-size: 1rem;
+        letter-spacing: 4px;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+      }
+
+      .phil-title {
+        font-size: 3rem;
+        font-weight: 200;
+        margin-bottom: 40px;
+        color: var(--text-light);
+        line-height: 1.4;
+      }
+
+      .phil-text {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        font-weight: 300;
+        margin-bottom: 20px;
+        max-width: 90%;
+      }
+
+      .phil-visual {
+        flex: 1;
+        position: relative;
+      }
+
+      .phil-img {
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+        filter: grayscale(20%) contrast(1.1);
+      }
+
+      /* --- The Experience Journey --- */
+      .experience {
+        padding: 120px 10%;
+        background: var(--bg-section);
+        text-align: center;
+      }
+
+      .exp-header {
+        margin-bottom: 80px;
+      }
+
+      .exp-header h2 {
+        font-size: 3rem;
+        color: var(--text-light);
+        font-weight: 200;
+        margin-bottom: 10px;
+      }
+
+      .exp-header p {
+        font-family: var(--font-en);
+        color: var(--gold);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+
+      .exp-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+      }
+
+      .exp-step {
+        padding: 40px;
+        border: 1px solid rgba(197, 168, 128, 0.1);
+        transition: transform 0.4s ease, border-color 0.4s ease;
+      }
+
+      .exp-step:hover {
+        transform: translateY(-10px);
+        border-color: rgba(197, 168, 128, 0.4);
+      }
+
+      .step-number {
+        font-family: var(--font-en);
+        font-size: 3.5rem;
+        color: var(--gold);
+        opacity: 0.5;
+        line-height: 1;
+        margin-bottom: 20px;
+      }
+
+      .step-title {
+        font-size: 1.5rem;
+        color: var(--text-light);
+        font-weight: 300;
+        margin-bottom: 15px;
+      }
+
+      .step-text {
+        color: var(--text-dim);
+        font-size: 1rem;
+        font-weight: 300;
+      }
+
+      /* --- Collections Grid --- */
+      .collections {
+        padding: 200px 8%;
+        background: var(--bg-dark);
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 150px;
+      }
+
+      .section-header h2 {
+        font-size: 3rem;
+        color: var(--text-light);
+        font-weight: 200;
+        letter-spacing: 2px;
+      }
+
+      .section-header p {
+        font-family: var(--font-en);
+        color: var(--gold);
+        font-size: 1rem;
+        letter-spacing: 6px;
+        margin-top: 15px;
+        text-transform: uppercase;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 150px 80px;
+      }
+
+      .look-card {
+        position: relative;
+      }
+      .look-card.stagger {
+        margin-top: 150px;
+      }
+
+      .look-img-wrapper {
+        overflow: hidden;
+        position: relative;
+        height: 85vh;
+      }
+
+      .look-main-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        filter: brightness(0.9);
+      }
+
+      .look-card:hover .look-main-img {
+        transform: scale(1.04);
+        filter: brightness(1);
+      }
+
+      .look-floating-img {
+        position: absolute;
+        bottom: -50px;
+        left: -40px;
+        width: 50%;
+        height: auto;
+        border: 6px solid var(--bg-dark);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        z-index: 2;
+        transition: transform 0.8s ease;
+      }
+
+      .look-card:hover .look-floating-img {
+        transform: translateY(-15px);
+      }
+
+      .look-info {
+        position: absolute;
+        top: 40px;
+        right: -30px;
+        background: var(--bg-dark);
+        padding: 25px 40px;
+        border-right: 1px solid var(--gold);
+        z-index: 3;
+      }
+
+      .look-info h3 {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-bottom: 5px;
+      }
+
+      .look-info span {
+        font-family: var(--font-en);
+        color: var(--text-dim);
+        font-size: 0.8rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+
+      /* --- Footer CTA --- */
+      footer {
+        padding: 150px 10%;
+        text-align: center;
+        background: var(--bg-section);
+        border-top: 1px solid rgba(197, 168, 128, 0.1);
+      }
+
+      .footer-logo {
+        width: 150px;
+        height: auto;
+        margin-bottom: 60px;
+        opacity: 0.8;
+      }
+
+      .footer-cta {
+        font-size: 2.5rem;
+        font-weight: 200;
+        color: var(--text-light);
+        margin-bottom: 30px;
+      }
+
+      .footer-text {
+        color: var(--text-dim);
+        max-width: 500px;
+        margin: 0 auto 60px auto;
+        font-size: 1rem;
+        line-height: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-socials">
+        <a
+          href="https://www.instagram.com/yaranaeemmakeup?igsh=Ym5naXJ6NzUwM2E="
+          target="_blank"
+          class="top-bar-link en-text"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+            />
+          </svg>
+          INSTAGRAM
+        </a>
+        <a
+          href="https://www.facebook.com/share/1XrVY52x2X/?mibextid=wwXIfr"
+          target="_blank"
+          class="top-bar-link en-text"
+        >
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+            />
+          </svg>
+          FACEBOOK
+        </a>
+      </div>
+      <div class="top-bar-location">
+        <a
+          href="index-en.html"
+          class="top-bar-link en-text"
+          style="font-weight: 600"
+        >
+          <span style="font-size: 14px; margin-right: 4px">🇺🇸</span> EN
+        </a>
+
+        <a
+          href="https://maps.google.com/?q=Mansoura+Dakahlia+Egypt"
+          target="_blank"
+          class="top-bar-link"
+        >
+          المنصورة، الدقهلية
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <header id="navbar">
+      <div class="nav-side right">
+        <a href="#collections" class="nav-link">المجموعات</a>
+        <a href="#philosophy" class="nav-link">الرؤية</a>
+      </div>
+
+      <div class="brand-logo">
+        <img src="images-logo/Untitled.png" alt="Yara Naeem" />
+      </div>
+
+      <div class="nav-side left">
+        <a href="#experience" class="nav-link">الرحلة</a>
+        <a href="#apply" class="btn-luxury">احجزي إطلالتك</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-slider">
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="hero-title-en en-text">Yara Naeem</h1>
+        <div class="hero-title-ar">خبيرة التجميل الراقية</div>
+        <a href="#apply" class="btn-luxury">احجزي إطلالتك</a>
+      </div>
+    </section>
+
+    <div class="social-proof reveal">
+      <p class="proof-text">
+        انضمتي لأكثر من <span>80,000</span> سيدة يثقن بلمسة يارا الساحرة
+      </p>
+    </div>
+
+    <section class="about-artist reveal" id="about">
+      <div class="about-svg-container">
+        <svg
+          class="yn-monogram-svg"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <text
+            x="50%"
+            y="55%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            class="yn-text"
+          >
+            YN
+          </text>
+        </svg>
+      </div>
+
+      <div class="about-text-container reveal delay-1">
+        <h2 class="en-text about-title-en">Meet The Artist</h2>
+        <h3 class="about-title-ar">من هي يارا نعيم؟</h3>
+        <p class="about-desc">
+          يارا نعيم ليست مجرد خبيرة تجميل، بل هي فنانة بصرية تصنع الجمال الخالد.
+          بخبرة تمتد لسنوات في عالم التجميل الراقي، استطاعت أن تحجز لنفسها مكانة
+          استثنائية كواحدة من أبرز الأسماء في مجال مكياج الزفاف والسواريه.
+        </p>
+        <p class="about-desc">
+          فلسفتها تعتمد على إبراز النور الداخلي لكل امرأة، دمج التقنيات العالمية
+          بأرقى المنتجات، لخلق إطلالات تتنفس بالرقي والفخامة. يارا تؤمن أن كل
+          وجه هو لوحة فريدة تنتظر اللمسة الملكية لتتألق في يومها الموعود.
+        </p>
+      </div>
+    </section>
+
+    <section class="philosophy" id="philosophy">
+      <div class="phil-content reveal">
+        <div class="phil-subtitle en-text">The Signature</div>
+        <h2 class="phil-title">الجمال ليس خطوة،<br />بل هو هوية.</h2>
+        <p class="phil-text">
+          في ستوديو يارا نعيم، نحن لا نغير ملامحك، بل نحتفي بها. نستخدم أحدث
+          التقنيات العالمية ممزوجة برؤية فنية دقيقة لنخلق مظهراً يبرز تألقك
+          الداخلي.
+        </p>
+        <p class="phil-text">
+          نريدك أن تنظري إلى المرآة وتشعرين بالثقة المطلقة... ثقة لا تُنسى،
+          وإطلالة تخطف الأنفاس تليق بيومك الاستثنائي.
+        </p>
+      </div>
+      <div class="phil-visual reveal delay-1">
+        <img
+          src="images-brides/15.JPG"
+          alt="فلسفة يارا نعيم"
+          class="phil-img"
+        />
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="exp-header reveal">
+        <h2>الرحلة الملكية</h2>
+        <p class="en-text">The Bespoke Experience</p>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-step reveal">
+          <div class="step-number">01</div>
+          <h3 class="step-title">الاستشارة</h3>
+          <p class="step-text">
+            نبدأ بفهم رؤيتك، دراسة ملامحك، وتحليل نوع بشرتك لنضع الأساس للإطلالة
+            المثالية التي تحلمين بها.
+          </p>
+        </div>
+        <div class="exp-step reveal delay-1">
+          <div class="step-number">02</div>
+          <h3 class="step-title">البروفة والتحضير</h3>
+          <p class="step-text">
+            نقوم بتجربة حية للمكياج وتجهيز البشرة بأرقى المنتجات العالمية لضمان
+            ثبات وجمال الإطلالة.
+          </p>
+        </div>
+        <div class="exp-step reveal delay-2">
+          <div class="step-number">03</div>
+          <h3 class="step-title">اليوم الموعود</h3>
+          <p class="step-text">
+            في يومك الاستثنائي، نطبق اللمسات الأخيرة بكل هدوء واحترافية لتتألقي
+            بثقة النجمات.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="collections" id="collections">
+      <div class="section-header reveal">
+        <h2>الإصدارات الحصرية</h2>
+        <p class="en-text">The Masterpieces</p>
+      </div>
+
+      <div class="grid-container">
+        <div class="look-card reveal">
+          <div class="look-info">
+            <h3>الزفاف</h3>
+            <span class="en-text">Royal Bridal</span>
+          </div>
+          <div class="look-img-wrapper">
+            <img
+              src="images-brides/16.JPG"
+              class="look-main-img"
+              alt="مكياج زفاف"
+            />
+          </div>
+          <img
+            src="images-brides/16.1.JPG"
+            class="look-floating-img reveal delay-1"
+            alt="زاوية زفاف"
+          />
+        </div>
+
+        <div class="look-card stagger reveal delay-1">
+          <div class="look-info">
+            <h3>كتب الكتاب</h3>
+            <span class="en-text">Katb Ktab</span>
+          </div>
+          <div class="look-img-wrapper">
+            <img
+              src="images-brides/4.JPG"
+              class="look-main-img"
+              alt="مكياج كتب كتاب"
+            />
+          </div>
+          <img
+            src="images-brides/4.1.JPG"
+            class="look-floating-img reveal delay-2"
+            alt="تفاصيل كتب كتاب"
+          />
+        </div>
+
+        <div class="look-card reveal">
+          <div class="look-info">
+            <h3>سواريه</h3>
+            <span class="en-text">Evening Glam</span>
+          </div>
+          <div class="look-img-wrapper">
+            <img
+              src="images-brides/12.JPG"
+              class="look-main-img"
+              alt="مكياج سواريه"
+            />
+          </div>
+        </div>
+
+        <div class="look-card stagger reveal delay-1">
+          <div class="look-info">
+            <h3>ليلة الحنة</h3>
+            <span class="en-text">Henna Night</span>
+          </div>
+          <div class="look-img-wrapper">
+            <img
+              src="images-brides/2.JPG"
+              class="look-main-img"
+              alt="مكياج حنة"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="apply" class="reveal">
+      <img
+        src="images-logo/Untitled.png"
+        alt="Yara Naeem"
+        class="footer-logo"
+      />
+      <h2 class="footer-cta">تأمين الموعد</h2>
+      <p class="footer-text">
+        نحن نقبل عدداً محدوداً من الحجوزات لضمان تقديم تجربة فنية متكاملة تليق
+        بكِ. تواصلي معنا الآن لتصميم إطلالتك الخاصة.
+      </p>
+      <a
+        href="https://www.instagram.com/yaranaeemmakeup/"
+        target="_blank"
+        class="btn-luxury"
+        >تواصل عبر إنستجرام</a
+      >
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 40) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.15,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              // Add active class to parents to trigger SVG draw animations too
+              if (entry.target.classList.contains("about-artist")) {
+                entry.target.classList.add("active");
+              }
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        const reveals = document.querySelectorAll(".reveal");
+        reveals.forEach((reveal) => {
+          observer.observe(reveal);
+        });
+      });
+    </script>
+  </body>
+</html>
