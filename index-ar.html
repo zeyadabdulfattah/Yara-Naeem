@@ -16,7 +16,15 @@
         --bg-section: #050505;
         --bg-lighter: #0a0a0a;
         --gold: #c5a880;
-        --text-light: #f4efea; /* Bright White/Ivory */
+        --gold-gradient: linear-gradient(
+          -90deg,
+          transparent,
+          rgba(197, 168, 128, 0.4),
+          #c5a880,
+          rgba(197, 168, 128, 0.4),
+          transparent
+        );
+        --text-light: #f4efea;
         --text-dim: #888888;
         --font-ar: "Cairo", sans-serif;
         --font-en: "Playfair Display", serif;
@@ -68,14 +76,14 @@
         transition-delay: 0.4s;
       }
 
-      /* --- Top Bar (Restored Dark Theme with Bright White Icons/Text) --- */
+      /* --- Top Bar --- */
       .top-bar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 50px;
-        background-color: var(--bg-dark); /* Restored Dark Background */
+        height: 40px;
+        background-color: var(--bg-dark);
         border-bottom: 1px solid rgba(197, 168, 128, 0.15);
         display: flex;
         justify-content: space-between;
@@ -83,15 +91,15 @@
         padding: 0 8%;
         z-index: 1002;
         font-size: 11px;
-        color: var(--text-light); /* Bright White */
-        letter-spacing: 1px;
+        color: var(--text-light);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
       }
 
       .top-bar-socials {
         display: flex;
         gap: 25px;
       }
-
       .top-bar-location {
         display: flex;
         align-items: center;
@@ -102,7 +110,7 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: var(--text-light); /* Bright White */
+        color: var(--text-light);
         text-decoration: none;
         transition: color 0.3s ease;
         letter-spacing: 2px;
@@ -120,117 +128,92 @@
         color: var(--gold);
       }
 
-      /* --- Main Navigation --- */
+      /* --- STACKED Main Navigation --- */
       header {
         position: fixed;
-        top: 50px;
+        top: 10px;
         width: 100%;
-        height: 150px;
+        height: 260px;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        padding: 0 8%;
+        padding-top: 15px;
+        padding-bottom: 10px;
         z-index: 1000;
-        background: var(--bg-dark);
-        transition: all 0.4s ease;
+        background: rgba(0, 0, 0, 0.4);
+        transition: background 0.4s ease, border-bottom 0.4s ease,
+          height 0.4s ease;
         border-bottom: 1px solid transparent;
       }
 
       header.scrolled {
-        top: 50px;
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(12px);
+        background: var(--bg-dark);
         border-bottom: 1px solid rgba(197, 168, 128, 0.15);
       }
 
-      .nav-side {
-        flex: 1;
-        display: flex;
-        align-items: center;
-      }
-
-      .nav-side.right {
-        justify-content: flex-start;
-        gap: 40px;
-      }
-      .nav-side.left {
-        justify-content: flex-end;
-        gap: 40px;
-      }
-
-      /* Floating Absolute Logo */
       .brand-logo {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 5px;
+        z-index: 1001;
       }
 
       .brand-logo img {
-        width: 180px;
+        width: 240px;
         height: auto;
-        opacity: 1;
-        transition: opacity 0.8s ease, transform 0.6s ease;
+        display: block;
+        transition: width 0.4s ease;
       }
 
-      header.scrolled .brand-logo img {
-        opacity: 0.95;
-        transform: scale(1);
+      /* --- THE GOLD DIVIDER --- */
+      .nav-divider {
+        width: 100%;
+        max-width: 350px;
+        height: 1px;
+        background: var(--gold-gradient);
+        margin-bottom: 25px;
       }
 
-      /* Upgraded Luxury Nav Links */
+      .nav-links-container {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      /* --- Premium Hover Links --- */
       .nav-link {
         color: var(--text-light);
         text-decoration: none;
-        font-size: 16px;
+        font-size: 14px; /* Slightly larger for Arabic legibility */
         font-weight: 500;
         letter-spacing: 1.5px;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        position: relative;
+        text-transform: uppercase;
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         padding: 5px 0;
         display: inline-block;
       }
 
-      /* The Gold Glowing Dot Hover Effect */
-      .nav-link::before {
-        content: "";
-        position: absolute;
-        bottom: -5px;
-        left: 50%;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--gold);
-        transform: translateX(-50%) scale(0);
-        transition: transform 0.4s ease;
-        box-shadow: 0 0 10px var(--gold);
-      }
-
       .nav-link:hover {
         color: var(--gold);
-        transform: translateY(-3px);
+        letter-spacing: 3px;
+        transform: translateY(-2px);
       }
 
-      .nav-link:hover::before {
-        transform: translateX(-50%) scale(1);
-      }
-
-      /* The Global Luxury Button */
       .btn-luxury {
         border: 1px solid var(--gold);
         color: var(--gold);
         background: transparent;
-        padding: 16px 45px;
-        font-size: 14px;
+        padding: 10px 28px;
+        font-size: 13px;
         font-weight: 600;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         text-transform: uppercase;
         text-decoration: none;
         transition: all 0.5s ease;
         font-family: var(--font-ar);
+        display: inline-block;
       }
 
       .btn-luxury:hover {
@@ -238,17 +221,45 @@
         color: var(--bg-dark);
       }
 
+      /* --- Mobile Hamburger Button --- */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .menu-toggle span {
+        width: 30px;
+        height: 1px;
+        background-color: var(--gold);
+        transition: all 0.3s ease;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
       /* --- Hero Section --- */
       .hero {
-        height: calc(100vh - 200px);
-        margin-top: 200px;
+        height: 100vh;
+        margin-top: 0;
+        padding-top: 180px;
         width: 100%;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 0 5%;
+        padding-left: 5%;
+        padding-right: 5%;
         overflow: hidden;
       }
 
@@ -260,7 +271,6 @@
         height: 100%;
         z-index: -2;
       }
-
       .hero-slide {
         position: absolute;
         top: 0;
@@ -273,7 +283,6 @@
         animation: fadeLoop 44s infinite;
       }
 
-      /* 11 Images */
       .hero-slide:nth-child(1) {
         background-image: url("images-brides/16.3.JPG");
         animation-delay: 0s;
@@ -345,11 +354,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.85);
+        background: rgba(0, 0, 0, 0.75);
         z-index: -1;
       }
 
       .hero-content {
+        margin-top: 60px;
         z-index: 1;
         display: flex;
         flex-direction: column;
@@ -358,23 +368,28 @@
       }
 
       .hero-title-en {
-        font-size: 5.5rem;
+        font-size: 6rem;
         color: var(--text-light);
         letter-spacing: 0.25em;
         text-transform: uppercase;
         font-weight: 200;
         line-height: 1;
         margin-bottom: 20px;
-        margin-right: -0.25em;
+        margin-left: -0.25em; /* LTR adjustment for Arabic */
       }
 
       .hero-title-ar {
         font-size: 1.6rem;
         color: var(--gold);
-        letter-spacing: 18px;
-        font-weight: 200;
-        margin-bottom: 50px;
-        margin-right: -18px;
+        letter-spacing: 12px;
+        font-weight: 300;
+        margin-bottom: 40px;
+        margin-left: -12px;
+      }
+
+      .hero .btn-luxury {
+        padding: 16px 45px;
+        font-size: 14px;
       }
 
       @keyframes fadeIn {
@@ -395,30 +410,26 @@
         text-align: center;
         border-bottom: 1px solid rgba(197, 168, 128, 0.1);
       }
-
       .proof-text {
         color: var(--text-dim);
-        font-size: 0.9rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        font-weight: 300;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        font-weight: 400;
       }
-
       .proof-text span {
         color: var(--gold);
         font-family: var(--font-en);
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         font-style: italic;
       }
 
-      /* --- Who is Yara Section (Elegant YN Monogram Reveal) --- */
+      /* --- Who is Yara Section --- */
       .about-artist {
         padding: 150px 10%;
         background-color: var(--bg-section);
         text-align: center;
         border-bottom: 1px solid rgba(197, 168, 128, 0.05);
       }
-
       .about-svg-container {
         margin: 0 auto 30px auto;
         display: flex;
@@ -426,14 +437,11 @@
         align-items: center;
         height: 120px;
       }
-
       .yn-monogram-svg {
         width: 100%;
         height: 100%;
         overflow: visible;
       }
-
-      /* The Text Drawing Animation */
       .yn-text {
         font-family: var(--font-en);
         font-size: 110px;
@@ -441,34 +449,28 @@
         fill: transparent;
         stroke: var(--gold);
         stroke-width: 1.5px;
-
         stroke-dasharray: 600;
         stroke-dashoffset: 600;
-
         transition: stroke-dashoffset 3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
           fill 1.5s ease-in-out 1.5s;
       }
-
       .about-artist.active .yn-text {
         stroke-dashoffset: 0;
         fill: var(--gold);
       }
-
       .about-title-en {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: var(--gold);
         letter-spacing: 6px;
         text-transform: uppercase;
         margin-bottom: 15px;
       }
-
       .about-title-ar {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 200;
         color: var(--text-light);
         margin-bottom: 30px;
       }
-
       .about-desc {
         color: var(--text-dim);
         font-size: 1.1rem;
@@ -476,6 +478,166 @@
         line-height: 2;
         max-width: 800px;
         margin: 0 auto 20px auto;
+      }
+
+      /* --- Masterpiece Accordion Gallery (RTL) --- */
+      .collections {
+        padding: 150px 5%;
+        background: var(--bg-dark);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+      .section-header h2 {
+        font-size: 3.5rem;
+        color: var(--text-light);
+        font-weight: 200;
+        letter-spacing: 1px;
+      }
+      .section-header p {
+        color: var(--gold);
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+        margin-top: 15px;
+      }
+
+      .masterpiece-accordion {
+        display: flex;
+        width: 100%;
+        height: 75vh;
+        gap: 10px;
+      }
+      .accordion-panel {
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        background: var(--bg-section);
+      }
+      .accordion-panel:hover {
+        flex: 5;
+      }
+      .accordion-panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.7s ease, filter 0.7s ease;
+        filter: grayscale(40%) brightness(0.6);
+      }
+      .accordion-panel:hover img {
+        filter: grayscale(0%) brightness(1);
+        transform: scale(1.05);
+      }
+
+      .accordion-vertical-title {
+        position: absolute;
+        bottom: 40px;
+        right: 50%;
+        transform: translateX(50%) rotate(90deg);
+        transform-origin: bottom center;
+        color: var(--text-light);
+        font-family: var(--font-en);
+        font-size: 1.2rem;
+        white-space: nowrap;
+        letter-spacing: 2px;
+        transition: opacity 0.3s ease;
+        opacity: 0.6;
+        pointer-events: none;
+      }
+      .accordion-panel:hover .accordion-vertical-title {
+        opacity: 0;
+      }
+
+      .accordion-content {
+        position: absolute;
+        bottom: 40px;
+        right: 40px; /* RTL Alignment */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease 0.2s;
+        pointer-events: none;
+      }
+      .accordion-panel:hover .accordion-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .accordion-content h3 {
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--text-light);
+        margin-bottom: 5px;
+        white-space: nowrap;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      }
+      .accordion-content p {
+        font-size: 1rem;
+        color: var(--gold);
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      }
+
+      /* --- Hair Transformations Section --- */
+      .hair-transformations {
+        padding: 150px 8%;
+        background: var(--bg-section);
+      }
+      .hair-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+      .transform-card {
+        position: relative;
+        aspect-ratio: 4/5;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid rgba(197, 168, 128, 0.1);
+      }
+      .img-before,
+      .img-after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.8s ease;
+      }
+      .img-after {
+        opacity: 0;
+      }
+      .transform-card:hover .img-before {
+        opacity: 0;
+      }
+      .transform-card:hover .img-after {
+        opacity: 1;
+      }
+      .transform-label {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        border: 1px solid var(--gold);
+        padding: 8px 20px;
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: 1px;
+        z-index: 10;
+        transition: all 0.4s ease;
+        pointer-events: none;
+      }
+      .transform-card .transform-label::after {
+        content: "اسحبي للنتيجة";
+      }
+      .transform-card:hover .transform-label {
+        background: var(--gold);
+        color: var(--bg-dark);
+      }
+      .transform-card:hover .transform-label::after {
+        content: "النتيجة";
       }
 
       /* --- The Philosophy --- */
@@ -487,27 +649,24 @@
         gap: 120px;
         background-color: var(--bg-dark);
       }
-
       .phil-content {
         flex: 1;
       }
-
       .phil-subtitle {
         color: var(--gold);
-        font-size: 1rem;
+        font-family: var(--font-en);
+        font-size: 0.85rem;
         letter-spacing: 4px;
         margin-bottom: 25px;
         text-transform: uppercase;
       }
-
       .phil-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
         font-weight: 200;
         margin-bottom: 40px;
         color: var(--text-light);
-        line-height: 1.4;
+        line-height: 1.3;
       }
-
       .phil-text {
         color: var(--text-dim);
         font-size: 1.1rem;
@@ -515,12 +674,10 @@
         margin-bottom: 20px;
         max-width: 90%;
       }
-
       .phil-visual {
         flex: 1;
         position: relative;
       }
-
       .phil-img {
         width: 100%;
         height: 700px;
@@ -528,197 +685,333 @@
         filter: grayscale(20%) contrast(1.1);
       }
 
-      /* --- The Experience Journey --- */
+      /* --- The Experience Journey (RTL) --- */
       .experience {
-        padding: 120px 10%;
+        padding: 150px 8%;
         background: var(--bg-section);
-        text-align: center;
+      }
+      .exp-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+      }
+      .exp-left {
+        width: 40%;
+        position: sticky;
+        top: 300px;
+      }
+      .exp-left h2 {
+        font-size: 4rem;
+        color: var(--text-light);
+        font-weight: 200;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .exp-left p {
+        font-family: var(--font-en);
+        color: var(--gold);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .exp-right {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      .exp-item {
+        position: relative;
+        padding-right: 60px;
+        border-right: 1px solid rgba(197, 168, 128, 0.2);
+        transition: border-color 0.5s ease;
+      }
+      .exp-item:hover {
+        border-right: 1px solid var(--gold);
+      }
+      .step-number {
+        position: absolute;
+        right: -45px;
+        top: -15px;
+        font-family: var(--font-en);
+        font-size: 6rem;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(197, 168, 128, 0.4);
+        line-height: 1;
+        transition: all 0.5s ease;
+        z-index: 0;
+      }
+      .exp-item:hover .step-number {
+        -webkit-text-stroke: 1.5px var(--gold);
+        transform: scale(1.05) translateX(5px);
+      }
+      .step-title {
+        font-size: 1.8rem;
+        color: var(--text-light);
+        font-weight: 300;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .step-text {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
       }
 
-      .exp-header {
+      /* ==================================================
+         NEW FULL RESPONSIVE LUXURY FOOTER
+         ================================================== */
+      .footer-main {
+        background-color: var(--bg-dark);
+        border-top: 1px solid rgba(197, 168, 128, 0.15);
+        padding: 100px 8% 40px 8%;
+      }
+
+      .footer-top {
+        text-align: center;
         margin-bottom: 80px;
       }
 
-      .exp-header h2 {
-        font-size: 3rem;
-        color: var(--text-light);
-        font-weight: 200;
-        margin-bottom: 10px;
-      }
-
-      .exp-header p {
-        font-family: var(--font-en);
-        color: var(--gold);
-        letter-spacing: 4px;
-        text-transform: uppercase;
-      }
-
-      .exp-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 60px;
-      }
-
-      .exp-step {
-        padding: 40px;
-        border: 1px solid rgba(197, 168, 128, 0.1);
-        transition: transform 0.4s ease, border-color 0.4s ease;
-      }
-
-      .exp-step:hover {
-        transform: translateY(-10px);
-        border-color: rgba(197, 168, 128, 0.4);
-      }
-
-      .step-number {
-        font-family: var(--font-en);
+      .footer-top h2 {
         font-size: 3.5rem;
-        color: var(--gold);
-        opacity: 0.5;
-        line-height: 1;
+        font-weight: 200;
+        color: var(--text-light);
         margin-bottom: 20px;
       }
 
-      .step-title {
-        font-size: 1.5rem;
-        color: var(--text-light);
-        font-weight: 300;
+      .footer-top p {
+        color: var(--text-dim);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto 30px auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 60px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-col h4 {
+        color: var(--gold);
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 25px;
+      }
+
+      .footer-col ul {
+        list-style: none;
+      }
+
+      .footer-col ul li {
         margin-bottom: 15px;
       }
 
-      .step-text {
+      .footer-col ul a,
+      .footer-col p {
         color: var(--text-dim);
-        font-size: 1rem;
-        font-weight: 300;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s ease;
       }
 
-      /* --- Collections Grid --- */
-      .collections {
-        padding: 200px 8%;
-        background: var(--bg-dark);
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: 150px;
-      }
-
-      .section-header h2 {
-        font-size: 3rem;
-        color: var(--text-light);
-        font-weight: 200;
-        letter-spacing: 2px;
-      }
-
-      .section-header p {
-        font-family: var(--font-en);
+      .footer-col ul a:hover {
         color: var(--gold);
-        font-size: 1rem;
-        letter-spacing: 6px;
-        margin-top: 15px;
-        text-transform: uppercase;
-      }
-
-      .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 150px 80px;
-      }
-
-      .look-card {
-        position: relative;
-      }
-      .look-card.stagger {
-        margin-top: 150px;
-      }
-
-      .look-img-wrapper {
-        overflow: hidden;
-        position: relative;
-        height: 85vh;
-      }
-
-      .look-main-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        filter: brightness(0.9);
-      }
-
-      .look-card:hover .look-main-img {
-        transform: scale(1.04);
-        filter: brightness(1);
-      }
-
-      .look-floating-img {
-        position: absolute;
-        bottom: -50px;
-        left: -40px;
-        width: 50%;
-        height: auto;
-        border: 6px solid var(--bg-dark);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-        z-index: 2;
-        transition: transform 0.8s ease;
-      }
-
-      .look-card:hover .look-floating-img {
-        transform: translateY(-15px);
-      }
-
-      .look-info {
-        position: absolute;
-        top: 40px;
-        right: -30px;
-        background: var(--bg-dark);
-        padding: 25px 40px;
-        border-right: 1px solid var(--gold);
-        z-index: 3;
-      }
-
-      .look-info h3 {
-        font-size: 1.8rem;
-        font-weight: 300;
-        margin-bottom: 5px;
-      }
-
-      .look-info span {
-        font-family: var(--font-en);
-        color: var(--text-dim);
-        font-size: 0.8rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-      }
-
-      /* --- Footer CTA --- */
-      footer {
-        padding: 150px 10%;
-        text-align: center;
-        background: var(--bg-section);
-        border-top: 1px solid rgba(197, 168, 128, 0.1);
       }
 
       .footer-logo {
-        width: 150px;
-        height: auto;
-        margin-bottom: 60px;
+        width: 140px;
+        margin-bottom: 20px;
         opacity: 0.8;
       }
 
-      .footer-cta {
-        font-size: 2.5rem;
-        font-weight: 200;
-        color: var(--text-light);
-        margin-bottom: 30px;
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        color: var(--text-dim);
+        font-size: 12px;
+        letter-spacing: 1px;
+        font-family: var(--font-en);
       }
 
-      .footer-text {
-        color: var(--text-dim);
-        max-width: 500px;
-        margin: 0 auto 60px auto;
-        font-size: 1rem;
-        line-height: 2;
+      /* ==================================================
+         MOBILE RESPONSIVE FIXES (PERFECT CENTERING)
+         ================================================== */
+      @media (max-width: 900px) {
+        .hide-mobile {
+          display: none !important;
+        }
+        .top-bar {
+          padding: 0 5%;
+        }
+
+        header {
+          height: 90px;
+          top: 40px;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 5%;
+        }
+
+        .brand-logo {
+          margin: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .brand-logo img {
+          width: 140px;
+        }
+        .nav-divider {
+          display: none;
+        }
+        .menu-toggle {
+          display: flex;
+          align-items: center;
+        }
+
+        .nav-links-container {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.98);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.4s ease;
+        }
+
+        .nav-links-container.open {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .nav-link {
+          font-size: 20px;
+          font-weight: 500;
+        }
+
+        .hero {
+          padding-top: 130px;
+        }
+        .hero-title-en {
+          font-size: 3.5rem;
+          letter-spacing: 0.15em;
+        }
+        .hero-title-ar {
+          font-size: 1.2rem;
+          letter-spacing: 6px;
+          margin-left: 0;
+          margin-right: -6px;
+        }
+
+        section,
+        .footer-main {
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+        .section-header h2 {
+          font-size: 2.5rem;
+        }
+
+        /* Experience Section Mobile */
+        .exp-container {
+          flex-direction: column;
+          gap: 40px;
+        }
+        .exp-left {
+          width: 100%;
+          position: relative;
+          top: 0;
+        }
+        .exp-left h2 {
+          font-size: 3rem;
+        }
+        .exp-right {
+          width: 100%;
+          padding-top: 20px;
+          gap: 80px;
+        }
+        .step-number {
+          font-size: 4rem;
+          right: -20px;
+          opacity: 0.2;
+        }
+        .exp-item {
+          padding-right: 30px;
+          border-right: 1px solid var(--gold);
+        }
+
+        /* Masterpiece Accordion */
+        .masterpiece-accordion {
+          flex-direction: column;
+          height: auto;
+          gap: 20px;
+        }
+        .accordion-panel {
+          height: 350px;
+          flex: none !important;
+        }
+        .accordion-panel img {
+          filter: grayscale(0%) brightness(0.85);
+        }
+        .accordion-vertical-title {
+          display: none;
+        }
+        .accordion-content {
+          opacity: 1;
+          transform: translateY(0);
+          right: 20px;
+          bottom: 20px;
+        }
+        .accordion-content h3 {
+          font-size: 2rem;
+        }
+
+        /* Hair Section Mobile */
+        .hair-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Philosophy Mobile */
+        .philosophy {
+          flex-direction: column;
+          gap: 50px;
+          text-align: center;
+        }
+        .phil-img {
+          height: 400px;
+        }
+
+        /* Footer Mobile */
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          text-align: center;
+        }
+        .footer-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .footer-top h2 {
+          font-size: 2.5rem;
+        }
       }
     </style>
   </head>
@@ -726,7 +1019,7 @@
     <div class="top-bar">
       <div class="top-bar-socials">
         <a
-          href="https://www.instagram.com/yaranaeemmakeup?igsh=Ym5naXJ6NzUwM2E="
+          href="https://www.instagram.com/yaranaeemmakeup"
           target="_blank"
           class="top-bar-link en-text"
         >
@@ -735,10 +1028,10 @@
               d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
             />
           </svg>
-          INSTAGRAM
+          <span class="hide-mobile">INSTAGRAM</span>
         </a>
         <a
-          href="https://www.facebook.com/share/1XrVY52x2X/?mibextid=wwXIfr"
+          href="https://www.facebook.com/share/1XrVY52x2X/"
           target="_blank"
           class="top-bar-link en-text"
         >
@@ -747,16 +1040,17 @@
               d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
             />
           </svg>
-          FACEBOOK
+          <span class="hide-mobile">FACEBOOK</span>
         </a>
       </div>
+
       <div class="top-bar-location">
         <a
           href="index-en.html"
           class="top-bar-link en-text"
           style="font-weight: 600"
         >
-          <span style="font-size: 14px; margin-right: 4px">🇺🇸</span> EN
+          <span style="font-size: 14px; margin-left: 4px">🇺🇸</span> EN
         </a>
 
         <a
@@ -764,7 +1058,7 @@
           target="_blank"
           class="top-bar-link"
         >
-          المنصورة، الدقهلية
+          <span class="hide-mobile">المنصورة، الدقهلية</span>
           <svg viewBox="0 0 24 24">
             <path
               d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"
@@ -775,17 +1069,22 @@
     </div>
 
     <header id="navbar">
-      <div class="nav-side right">
-        <a href="#collections" class="nav-link">المجموعات</a>
-        <a href="#philosophy" class="nav-link">الرؤية</a>
-      </div>
-
       <div class="brand-logo">
         <img src="images-logo/Untitled.png" alt="Yara Naeem" />
       </div>
 
-      <div class="nav-side left">
-        <a href="#experience" class="nav-link">الرحلة</a>
+      <div class="nav-divider"></div>
+
+      <div class="menu-toggle" id="mobile-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="nav-links-container" id="nav-links">
+        <a href="#collections" class="nav-link">المجموعات</a>
+        <a href="#hair" class="nav-link">الشعر</a>
+        <a href="#philosophy" class="nav-link">الرؤية</a>
         <a href="#apply" class="btn-luxury">احجزي إطلالتك</a>
       </div>
     </header>
@@ -804,9 +1103,7 @@
         <div class="hero-slide"></div>
         <div class="hero-slide"></div>
       </div>
-
       <div class="hero-overlay"></div>
-
       <div class="hero-content">
         <h1 class="hero-title-en en-text">Yara Naeem</h1>
         <div class="hero-title-ar">خبيرة التجميل الراقية</div>
@@ -816,7 +1113,8 @@
 
     <div class="social-proof reveal">
       <p class="proof-text">
-        انضمتي لأكثر من <span>80,000</span> سيدة يثقن بلمسة يارا الساحرة
+        انضمتي لأكثر من <span class="en-text">80,000</span> سيدة يثقن بلمسة يارا
+        الساحرة
       </p>
     </div>
 
@@ -840,7 +1138,7 @@
       </div>
 
       <div class="about-text-container reveal delay-1">
-        <h2 class="en-text about-title-en">Meet The Artist</h2>
+        <h2 class="about-title-en en-text">Meet The Artist</h2>
         <h3 class="about-title-ar">من هي يارا نعيم؟</h3>
         <p class="about-desc">
           يارا نعيم ليست مجرد خبيرة تجميل، بل هي فنانة بصرية تصنع الجمال الخالد.
@@ -852,6 +1150,96 @@
           بأرقى المنتجات، لخلق إطلالات تتنفس بالرقي والفخامة. يارا تؤمن أن كل
           وجه هو لوحة فريدة تنتظر اللمسة الملكية لتتألق في يومها الموعود.
         </p>
+      </div>
+    </section>
+
+    <section class="collections" id="collections">
+      <div class="section-header reveal">
+        <h2>الإصدارات الحصرية</h2>
+        <p class="en-text">The Masterpieces</p>
+      </div>
+
+      <div class="masterpiece-accordion reveal delay-1">
+        <div class="accordion-panel">
+          <img src="images-brides/16.JPG" alt="Royal Bridal" />
+          <div class="accordion-vertical-title en-text">ROYAL BRIDAL</div>
+          <div class="accordion-content">
+            <h3>الزفاف</h3>
+            <p>إطلالة ملكية ساحرة</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/4.JPG" alt="Katb Ktab" />
+          <div class="accordion-vertical-title en-text">KATB KTAB</div>
+          <div class="accordion-content">
+            <h3>كتب الكتاب</h3>
+            <p>نعومة ورقي</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/12.JPG" alt="Evening Glam" />
+          <div class="accordion-vertical-title en-text">EVENING GLAM</div>
+          <div class="accordion-content">
+            <h3>سواريه</h3>
+            <p>جمال خاطف للأنظار</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/17.JPG" alt="Editorial" />
+          <div class="accordion-vertical-title en-text">EDITORIAL</div>
+          <div class="accordion-content">
+            <h3>إيديتوريال</h3>
+            <p>رؤية فنية استثنائية</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/14.JPG" alt="Modest Elegance" />
+          <div class="accordion-vertical-title en-text">MODEST ELEGANCE</div>
+          <div class="accordion-content">
+            <h3>للمحجبات</h3>
+            <p>أناقة محتشمة</p>
+          </div>
+        </div>
+
+        <div class="accordion-panel">
+          <img src="images-brides/8.JPG" alt="The Glow" />
+          <div class="accordion-vertical-title en-text">THE GLOW</div>
+          <div class="accordion-content">
+            <h3>إشراقة</h3>
+            <p>نضارة تدوم طويلاً</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hair-transformations" id="hair">
+      <div class="section-header reveal">
+        <h2>إبداعات الشعر</h2>
+        <p>قبل وبعد</p>
+      </div>
+
+      <div class="hair-grid">
+        <div class="transform-card reveal">
+          <img src="images-hair/4.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/4.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
+
+        <div class="transform-card reveal delay-1">
+          <img src="images-hair/7.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/7.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
+
+        <div class="transform-card reveal delay-2">
+          <img src="images-hair/3.jpg" class="img-before" alt="Hair Before" />
+          <img src="images-hair/3.1.jpg" class="img-after" alt="Hair After" />
+          <div class="transform-label"></div>
+        </div>
       </div>
     </section>
 
@@ -872,143 +1260,137 @@
       <div class="phil-visual reveal delay-1">
         <img
           src="images-brides/15.JPG"
-          alt="فلسفة يارا نعيم"
+          alt="Yara Naeem Philosophy"
           class="phil-img"
         />
       </div>
     </section>
 
     <section class="experience" id="experience">
-      <div class="exp-header reveal">
-        <h2>الرحلة الملكية</h2>
-        <p class="en-text">The Bespoke Experience</p>
-      </div>
-      <div class="exp-grid">
-        <div class="exp-step reveal">
-          <div class="step-number">01</div>
-          <h3 class="step-title">الاستشارة</h3>
-          <p class="step-text">
-            نبدأ بفهم رؤيتك، دراسة ملامحك، وتحليل نوع بشرتك لنضع الأساس للإطلالة
-            المثالية التي تحلمين بها.
-          </p>
-        </div>
-        <div class="exp-step reveal delay-1">
-          <div class="step-number">02</div>
-          <h3 class="step-title">البروفة والتحضير</h3>
-          <p class="step-text">
-            نقوم بتجربة حية للمكياج وتجهيز البشرة بأرقى المنتجات العالمية لضمان
-            ثبات وجمال الإطلالة.
-          </p>
-        </div>
-        <div class="exp-step reveal delay-2">
-          <div class="step-number">03</div>
-          <h3 class="step-title">اليوم الموعود</h3>
-          <p class="step-text">
-            في يومك الاستثنائي، نطبق اللمسات الأخيرة بكل هدوء واحترافية لتتألقي
-            بثقة النجمات.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="collections" id="collections">
-      <div class="section-header reveal">
-        <h2>الإصدارات الحصرية</h2>
-        <p class="en-text">The Masterpieces</p>
-      </div>
-
-      <div class="grid-container">
-        <div class="look-card reveal">
-          <div class="look-info">
-            <h3>الزفاف</h3>
-            <span class="en-text">Royal Bridal</span>
-          </div>
-          <div class="look-img-wrapper">
-            <img
-              src="images-brides/16.JPG"
-              class="look-main-img"
-              alt="مكياج زفاف"
-            />
-          </div>
-          <img
-            src="images-brides/16.1.JPG"
-            class="look-floating-img reveal delay-1"
-            alt="زاوية زفاف"
-          />
+      <div class="exp-container reveal">
+        <div class="exp-left">
+          <h2>الرحلة<br />الملكية</h2>
+          <p class="en-text">The Bespoke Experience</p>
         </div>
 
-        <div class="look-card stagger reveal delay-1">
-          <div class="look-info">
-            <h3>كتب الكتاب</h3>
-            <span class="en-text">Katb Ktab</span>
+        <div class="exp-right">
+          <div class="exp-item">
+            <div class="step-number">01</div>
+            <h3 class="step-title">دراسة متعمقة وتحليل</h3>
+            <p class="step-text">
+              دراسة متعمقة لجمالك، تفاصيل فستانك، وملامح وجهك. نقوم بتحليل نوع
+              بشرتك لتصميم روتين عناية مخصص قبل الزفاف، لضمان الحصول على بشرة
+              مثالية قبل يومك الموعود.
+            </p>
           </div>
-          <div class="look-img-wrapper">
-            <img
-              src="images-brides/4.JPG"
-              class="look-main-img"
-              alt="مكياج كتب كتاب"
-            />
-          </div>
-          <img
-            src="images-brides/4.1.JPG"
-            class="look-floating-img reveal delay-2"
-            alt="تفاصيل كتب كتاب"
-          />
-        </div>
 
-        <div class="look-card reveal">
-          <div class="look-info">
-            <h3>سواريه</h3>
-            <span class="en-text">Evening Glam</span>
+          <div class="exp-item">
+            <div class="step-number">02</div>
+            <h3 class="step-title">بروفة الماستر كلاس</h3>
+            <p class="step-text">
+              تجربة حصرية في الستوديو حيث يتحول خيالك إلى واقع. نختبر أرقى
+              المنتجات لضمان ثبات مثالي، ونلتقط صوراً للإطلالة تحت إضاءات
+              مختلفة، ونقوم بضبط كل تفصيلة بدقة حتى تتطابق مع رؤيتك تماماً.
+            </p>
           </div>
-          <div class="look-img-wrapper">
-            <img
-              src="images-brides/12.JPG"
-              class="look-main-img"
-              alt="مكياج سواريه"
-            />
-          </div>
-        </div>
 
-        <div class="look-card stagger reveal delay-1">
-          <div class="look-info">
-            <h3>ليلة الحنة</h3>
-            <span class="en-text">Henna Night</span>
-          </div>
-          <div class="look-img-wrapper">
-            <img
-              src="images-brides/2.JPG"
-              class="look-main-img"
-              alt="مكياج حنة"
-            />
+          <div class="exp-item">
+            <div class="step-number">03</div>
+            <h3 class="step-title">اليوم الموعود</h3>
+            <p class="step-text">
+              خدمة فاخرة في موقعك تبدأ بجلسة تحضير للبشرة. نقوم بتطبيق مكياج
+              مثالي مقاوم للدموع، مع لمسة إشراقة للجسم، وتثبيت الطرحة باحترافية،
+              ونقدم لكِ مجموعة لمسات أخيرة لتبقي متألقة طوال الليل.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <footer id="apply" class="reveal">
-      <img
-        src="images-logo/Untitled.png"
-        alt="Yara Naeem"
-        class="footer-logo"
-      />
-      <h2 class="footer-cta">تأمين الموعد</h2>
-      <p class="footer-text">
-        نحن نقبل عدداً محدوداً من الحجوزات لضمان تقديم تجربة فنية متكاملة تليق
-        بكِ. تواصلي معنا الآن لتصميم إطلالتك الخاصة.
-      </p>
-      <a
-        href="https://www.instagram.com/yaranaeemmakeup/"
-        target="_blank"
-        class="btn-luxury"
-        >تواصل عبر إنستجرام</a
-      >
+    <footer id="apply" class="footer-main">
+      <div class="footer-top reveal">
+        <h2>تأمين الموعد</h2>
+        <p>
+          نحن نقبل عدداً محدوداً من الحجوزات لضمان تقديم تجربة فنية متكاملة تليق
+          بكِ. تواصلي معنا الآن لتصميم إطلالتك الخاصة.
+        </p>
+        <a
+          href="https://www.instagram.com/yaranaeemmakeup"
+          target="_blank"
+          class="btn-luxury"
+          >تواصل عبر إنستجرام</a
+        >
+      </div>
+
+      <div class="footer-grid reveal delay-1">
+        <div class="footer-col">
+          <img
+            src="images-logo/Untitled.png"
+            alt="Yara Naeem"
+            class="footer-logo"
+          />
+          <p>خبيرة التجميل الراقية<br />المنصورة، مصر.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>استكشاف</h4>
+          <ul>
+            <li><a href="#collections">الإصدارات الحصرية</a></li>
+            <li><a href="#hair">إبداعات الشعر</a></li>
+            <li><a href="#philosophy">فلسفتنا</a></li>
+            <li><a href="#experience">الرحلة الملكية</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>تواصل معنا</h4>
+          <ul>
+            <li>
+              <a
+                href="https://www.instagram.com/yaranaeemmakeup"
+                target="_blank"
+                >انستجرام</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/share/1XrVY52x2X/"
+                target="_blank"
+                >فيسبوك</a
+              >
+            </li>
+            <li><a href="index-en.html" class="en-text">English</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="en-text">© 2026 Yara Naeem. All Rights Reserved.</p>
+      </div>
     </footer>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const navbar = document.getElementById("navbar");
+        /* --- Mobile Navigation Logic --- */
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const navLinksContainer = document.getElementById("nav-links");
+        const navLinks = document.querySelectorAll(".nav-link");
 
+        mobileMenuBtn.addEventListener("click", function () {
+          this.classList.toggle("active");
+          navLinksContainer.classList.toggle("open");
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            mobileMenuBtn.classList.remove("active");
+            navLinksContainer.classList.remove("open");
+          });
+        });
+
+        /* --- Scroll / Sticky Header Logic --- */
+        const navbar = document.getElementById("navbar");
         window.addEventListener("scroll", () => {
           if (window.scrollY > 40) {
             navbar.classList.add("scrolled");
@@ -1017,6 +1399,7 @@
           }
         });
 
+        /* --- Intersection Observer (Reveal on Scroll) --- */
         const observerOptions = {
           root: null,
           rootMargin: "0px",
@@ -1027,7 +1410,6 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("active");
-              // Add active class to parents to trigger SVG draw animations too
               if (entry.target.classList.contains("about-artist")) {
                 entry.target.classList.add("active");
               }

@@ -483,88 +483,7 @@
         margin: 0 auto 20px auto;
       }
 
-      /* --- The Experience Journey --- */
-      .experience {
-        padding: 150px 8%;
-        background: var(--bg-section);
-      }
-      .exp-container {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 80px;
-      }
-      .exp-left {
-        width: 40%;
-        position: sticky;
-        top: 300px;
-      }
-      .exp-left h2 {
-        font-size: 4rem;
-        color: var(--text-light);
-        font-weight: 200;
-        line-height: 1.1;
-        margin-bottom: 20px;
-      }
-      .exp-left p {
-        font-family: var(--font-serif);
-        color: var(--gold);
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        font-size: 0.9rem;
-      }
-      .exp-right {
-        width: 55%;
-        display: flex;
-        flex-direction: column;
-        gap: 150px;
-        padding-top: 50px;
-        padding-bottom: 50px;
-      }
-      .exp-item {
-        position: relative;
-        padding-left: 60px;
-        border-left: 1px solid rgba(197, 168, 128, 0.2);
-        transition: border-color 0.5s ease;
-      }
-      .exp-item:hover {
-        border-left: 1px solid var(--gold);
-      }
-      .step-number {
-        position: absolute;
-        left: -45px;
-        top: -15px;
-        font-family: var(--font-serif);
-        font-size: 6rem;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(197, 168, 128, 0.4);
-        line-height: 1;
-        transition: all 0.5s ease;
-        z-index: 0;
-      }
-      .exp-item:hover .step-number {
-        -webkit-text-stroke: 1.5px var(--gold);
-        transform: scale(1.05) translateX(-5px);
-      }
-      .step-title {
-        font-size: 1.8rem;
-        color: var(--text-light);
-        font-weight: 300;
-        margin-bottom: 20px;
-        letter-spacing: 1px;
-        position: relative;
-        z-index: 1;
-      }
-      .step-text {
-        color: var(--text-dim);
-        font-size: 1rem;
-        font-weight: 300;
-        line-height: 1.8;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* --- Masterpiece Accordion --- */
+      /* --- Masterpiece Accordion Gallery --- */
       .collections {
         padding: 150px 5%;
         background: var(--bg-dark);
@@ -774,6 +693,87 @@
         filter: grayscale(20%) contrast(1.1);
       }
 
+      /* --- The Experience Journey --- */
+      .experience {
+        padding: 150px 8%;
+        background: var(--bg-section);
+      }
+      .exp-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+      }
+      .exp-left {
+        width: 40%;
+        position: sticky;
+        top: 300px;
+      }
+      .exp-left h2 {
+        font-size: 4rem;
+        color: var(--text-light);
+        font-weight: 200;
+        line-height: 1.1;
+        margin-bottom: 20px;
+      }
+      .exp-left p {
+        font-family: var(--font-serif);
+        color: var(--gold);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .exp-right {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        gap: 150px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      .exp-item {
+        position: relative;
+        padding-left: 60px;
+        border-left: 1px solid rgba(197, 168, 128, 0.2);
+        transition: border-color 0.5s ease;
+      }
+      .exp-item:hover {
+        border-left: 1px solid var(--gold);
+      }
+      .step-number {
+        position: absolute;
+        left: -45px;
+        top: -15px;
+        font-family: var(--font-serif);
+        font-size: 6rem;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(197, 168, 128, 0.4);
+        line-height: 1;
+        transition: all 0.5s ease;
+        z-index: 0;
+      }
+      .exp-item:hover .step-number {
+        -webkit-text-stroke: 1.5px var(--gold);
+        transform: scale(1.05) translateX(-5px);
+      }
+      .step-title {
+        font-size: 1.8rem;
+        color: var(--text-light);
+        font-weight: 300;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+      }
+      .step-text {
+        color: var(--text-dim);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.8;
+        position: relative;
+        z-index: 1;
+      }
+
       /* ==================================================
          NEW FULL RESPONSIVE LUXURY FOOTER
          ================================================== */
@@ -853,7 +853,7 @@
       }
 
       /* ==================================================
-         MOBILE RESPONSIVE FIXES
+         MOBILE RESPONSIVE FIXES (PERFECT CENTERING)
          ================================================== */
       @media (max-width: 900px) {
         /* Utility to hide text in top bar, keeping only icons */
@@ -867,25 +867,32 @@
 
         /* Mobile Header / Hamburger */
         header {
-          height: 100px;
+          height: 90px;
+          top: 40px; /* Perfectly clears the top bar */
           flex-direction: row;
           justify-content: space-between;
-          padding: 10px 5% 0 5%;
+          align-items: center; /* PERFECT VERTICAL CENTERING */
+          padding: 0 5%; /* Reset all desktop padding */
         }
 
         .brand-logo {
-          margin-bottom: 0;
+          margin: 0;
+          display: flex;
+          align-items: center;
         }
+
         .brand-logo img {
           width: 140px;
         }
+
         .nav-divider {
           display: none;
         }
 
         .menu-toggle {
           display: flex;
-        } /* Show Hamburger */
+          align-items: center;
+        }
 
         /* Mobile Navigation Full Screen Overlay */
         .nav-links-container {
@@ -916,7 +923,7 @@
 
         /* Hero Section Adjustments */
         .hero {
-          padding-top: 100px;
+          padding-top: 130px;
         }
         .hero-title-main {
           font-size: 3.5rem;
@@ -963,7 +970,7 @@
         .exp-item {
           padding-left: 30px;
           border-left: 1px solid var(--gold);
-        } /* Keeps line visible always on mobile */
+        }
 
         /* Masterpiece Accordion -> Stacks automatically for touch screens */
         .masterpiece-accordion {
@@ -973,7 +980,7 @@
         }
         .accordion-panel {
           height: 350px;
-          flex: none !important; /* Disables flex-grow hover effect for mobile */
+          flex: none !important;
         }
         .accordion-panel img {
           filter: grayscale(0%) brightness(0.85);
@@ -1381,7 +1388,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Yara Naeem. All Rights Reserved.</p>
+        <p>© 2026 Yara Naeem. All Rights Reserved.</p>
       </div>
     </footer>
 
